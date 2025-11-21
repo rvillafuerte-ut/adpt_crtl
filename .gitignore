@@ -1,0 +1,50 @@
+# CMake / build artifacts
+/build/
+/src/build/
+cmake-build-*/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/Makefile
+
+# Compiled objects / binaries
+**/*.o
+**/*.a
+**/*.so
+**/*.lo
+**/*.la
+**/*.out
+**/*.exe
+
+# Project executables typically built in build dirs
+# (covered by build/ ignore, kept here for safety if built elsewhere)
+lin_ss_adpt
+nonlin_pendulum_adpt
+mimo_lqr_adpt
+2dof_robot_adpt
+
+# Generated data and plots
+*.csv
+*.png
+*.pdf
+
+# Python caches and environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor/IDE settings
+.vscode/
+.idea/
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
