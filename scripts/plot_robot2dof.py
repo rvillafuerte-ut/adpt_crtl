@@ -1,11 +1,19 @@
 import sys
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 if len(sys.argv) > 1:
     fname = sys.argv[1]
 else:
     fname = 'robot2dof_output.csv'
+
+output_dir = '.'
+if len(sys.argv) > 2:
+    output_dir = sys.argv[2]
+
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 
 # Cargar datos
 try:
@@ -49,8 +57,9 @@ if mode == '2dof':
     axes1[1,1].set_xlabel('t (s)')
     axes1[1,1].grid(alpha=0.3)
     plt.tight_layout()
-    fig1.savefig('robot2dof_tracking_torque.png', dpi=150)
-    print('Guardado: robot2dof_tracking_torque.png')
+    out_path1 = os.path.join(output_dir, 'robot2dof_tracking_torque.png')
+    fig1.savefig(out_path1, dpi=150)
+    print(f'Guardado: {out_path1}')
 
     # Figura 2: Parámetros
     fig2, ax2 = plt.subplots(3, 2, figsize=(10,9))
@@ -72,8 +81,9 @@ if mode == '2dof':
     for a in ax2[2]:
         a.set_xlabel('t (s)')
     plt.tight_layout()
-    fig2.savefig('robot2dof_params.png', dpi=150)
-    print('Guardado: robot2dof_params.png')
+    out_path2 = os.path.join(output_dir, 'robot2dof_params.png')
+    fig2.savefig(out_path2, dpi=150)
+    print(f'Guardado: {out_path2}')
 else:
     # Modo MIMO detectado, graficar básico para informar al usuario
     fig, ax = plt.subplots(3, 2, figsize=(11,9))
@@ -97,8 +107,9 @@ else:
     for a in ax[2]:
         a.set_xlabel('t (s)')
     plt.tight_layout()
-    fig.savefig('mimo_detected.png', dpi=150)
-    print('Guardado: mimo_detected.png')
+    out_path_mimo = os.path.join(output_dir, 'mimo_detected.png')
+    fig.savefig(out_path_mimo, dpi=150)
+    print(f'Guardado: {out_path_mimo}')
     print('NOTA: Para generar robot2dof_output.csv correcto ejecute: ./2dof_robot_adpt > robot2dof_output.csv')
 
-plt.show()
+# plt.show()  # Comentado para evitar warning en modo no-interactivo
